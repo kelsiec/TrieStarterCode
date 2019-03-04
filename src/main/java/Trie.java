@@ -1,3 +1,5 @@
+package main.java;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -18,6 +20,13 @@ public class Trie {
         }
     }
 
+    public void remove(String word) {
+        if (contains(word)) {
+            EntryNode current = trie.getRoot();
+
+        }
+    }
+
     public void insert(String word) {
         EntryNode current = trie.getRoot();
         for (int i = 0; i < word.length(); i++) {
@@ -28,8 +37,10 @@ public class Trie {
                 child = new EntryNode(character, i == word.length() - 1);
                 current.addChild(child);
             }
-
             current = child;
+            if (i == word.length() - 1) {
+                current.setTerminal(true);
+            }
         }
     }
 

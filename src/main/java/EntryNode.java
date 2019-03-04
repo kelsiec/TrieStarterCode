@@ -1,3 +1,5 @@
+package main.java;
+
 import java.util.*;
 
 
@@ -14,7 +16,6 @@ public class EntryNode {
         this.letter = letter;
         this.isTerminal = isTerminal;
     }
-
 
     EntryNode getChild(Character data) {
         return children.get(data);
