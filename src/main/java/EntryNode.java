@@ -50,11 +50,17 @@ public class EntryNode {
         return String.valueOf(new char[] {letter, modifier});
     }
 
-    void print(String prefix, boolean isTail) {
-        System.out.println(prefix + (isTail ? "└── " : "├── ") + this);
+    public String subtreeToString(String prefix, boolean isTail) {
+        StringBuilder result = new StringBuilder(
+            prefix + (isTail ? "└── " : "├── ") + this.toString() + "\n"
+        );
         for (char letter : children.keySet()) {
-            children.get(letter).print(prefix + (isTail ? "    " : "│   "), false);
+            result.append(children.get(letter).subtreeToString(
+                    prefix + (isTail ? "    " : "│   "), false)
+            );
         }
+
+        return result.toString();
     }
 }
 

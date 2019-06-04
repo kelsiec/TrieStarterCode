@@ -5,7 +5,7 @@ public class Tree {
         return this.root;
     }
 
-    public void print() {
-        root.print("", true);
+    public String toString() {
+        return root.subtreeToString("", true);
     }
 }

@@ -8,8 +8,8 @@ import java.util.Scanner;
 public class Trie {
     private Tree trie = new Tree();
 
-    public void printTrie() {
-        trie.print();
+    public String toString() {
+        return trie.toString();
     }
 
     public void addWords(List<String> words) {
@@ -58,7 +58,7 @@ public class Trie {
 
         Trie trie = new Trie();
         trie.addWords(words);
-        trie.printTrie();
+        System.out.println(trie);
 
         System.out.println();
         System.out.println("This test should report false:");
