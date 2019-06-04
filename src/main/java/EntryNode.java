@@ -2,7 +2,7 @@ import java.util.*;
 
 
 public class EntryNode {
-    private char letter;
+    private final char letter;
     private boolean isTerminal;
     private Map<Character, EntryNode> children = new HashMap<>();
 
