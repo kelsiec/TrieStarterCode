@@ -6,29 +6,36 @@ public class EntryNode {
     private boolean isTerminal;
     private Map<Character, EntryNode> children = new HashMap<>();
 
-    EntryNode(char letter) {
+    public EntryNode(char letter) {
         this(letter, false);
     }
 
-    EntryNode(char letter, boolean isTerminal) {
+    public EntryNode(char letter, boolean isTerminal) {
         this.letter = letter;
         this.isTerminal = isTerminal;
     }
 
+    public int getNumChildren() {
+        return children.size();
+    }
 
-    EntryNode getChild(Character data) {
+    public EntryNode getChild(Character data) {
         return children.get(data);
     }
 
-    void addChild(EntryNode child) {
+    public void addChild(EntryNode child) {
         this.children.put(child.letter, child);
     }
 
-    boolean isTerminal() {
+    public void removeChild(Character childLetter) {
+        this.children.remove(childLetter);
+    }
+
+    public boolean isTerminal() {
         return isTerminal;
     }
 
-    void setTerminal(boolean isTerminal) {
+    public void setTerminal(boolean isTerminal) {
         this.isTerminal = isTerminal;
     }
 

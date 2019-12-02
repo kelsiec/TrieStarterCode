@@ -1,9 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Trie {
 
@@ -23,6 +20,7 @@ public class Trie {
         }
     }
 
+    // This method contains a bug for you to fix
     public void insert(String word) {
         EntryNode current = this.getRoot();
         for (int i = 0; i < word.length(); i++) {
@@ -35,6 +33,34 @@ public class Trie {
             }
 
             current = child;
+        }
+    }
+
+    public void remove(String word) {
+        EntryNode goingForward = this.getRoot();
+        Stack<EntryNode> stack = new Stack<>();
+        stack.push(goingForward);
+
+        // Get to the end of the word
+        for (int i = 0; i < word.length(); i++) {
+            goingForward = goingForward.getChild(word.charAt(i));
+            stack.push(goingForward);
+        }
+
+        // Remove the last letter
+        EntryNode last = stack.pop();
+        last.setTerminal(false);
+
+        // Go back letter by letter to remove
+        // This is missing logic to make sure that the child to remove isn't terminal,
+        // and that it doesn't have any children that would also be incorrectly removed
+        for (int i = word.length() - 1; i >= 0; i--) {
+            EntryNode goingBack = stack.pop();
+            EntryNode child = goingBack.getChild(word.charAt(i));
+            if (child.isTerminal() || child.getNumChildren() > 0) {
+                break;
+            }
+            goingBack.removeChild(word.charAt(i));
         }
     }
 
@@ -81,5 +107,10 @@ public class Trie {
         System.out.println("Contains 'the': " + trie.contains("the"));
         System.out.println("Contains 'shore': " + trie.contains("shore"));
         System.out.println("Contains 'shorebird': " + trie.contains("shorebird"));
+
+        // These removes should produce a tree missing just those words
+        trie.remove("shorebird");
+        trie.remove("sells");
+        System.out.println(trie);
     }
 }
