@@ -6,10 +6,15 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Trie {
-    private Tree trie = new Tree();
+
+    private EntryNode root = new EntryNode(' ');
+
+    public EntryNode getRoot() {
+        return this.root;
+    }
 
     public String toString() {
-        return trie.toString();
+        return root.subtreeToString("", true);
     }
 
     public void addWords(List<String> words) {
@@ -19,7 +24,7 @@ public class Trie {
     }
 
     public void insert(String word) {
-        EntryNode current = trie.getRoot();
+        EntryNode current = this.getRoot();
         for (int i = 0; i < word.length(); i++) {
             char character = word.charAt(i);
 
@@ -34,7 +39,7 @@ public class Trie {
     }
 
     public boolean contains(String potentialWord) {
-        EntryNode current = trie.getRoot();
+        EntryNode current = this.getRoot();
         for (int i = 0; i < potentialWord.length(); i++) {
             char character = potentialWord.charAt(i);
 
